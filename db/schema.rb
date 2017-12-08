@@ -16,6 +16,38 @@ ActiveRecord::Schema.define(version: 20171208162942) do
   enable_extension "plpgsql"
   enable_extension "pgcrypto"
 
+  create_table "alerts", id: :serial, force: :cascade do |t|
+    t.string "content"
+    t.date "start_date"
+    t.date "end_date"
+    t.string "link"
+    t.text "notes"
+    t.boolean "archive"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "articles", id: :serial, force: :cascade do |t|
+    t.string "title"
+    t.string "subtitle"
+    t.string "author"
+    t.text "content"
+    t.string "link_text"
+    t.string "link_url"
+    t.boolean "archived"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image_uid"
+  end
+
+  create_table "permissions", id: :serial, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "page_id"
+    t.datetime "created_at"
+    t.index ["page_id"], name: "index_permissions_on_page_id"
+    t.index ["user_id"], name: "index_permissions_on_user_id"
+  end
+
   create_table "simplec_document_sets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "slug"
     t.string "name"
@@ -94,6 +126,18 @@ ActiveRecord::Schema.define(version: 20171208162942) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_simplec_subdomains_on_name", unique: true
+  end
+
+  create_table "users", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password_digest"
+    t.boolean "admin", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "sysadmin", default: false
+    t.index ["email"], name: "index_users_on_email"
+    t.index ["sysadmin"], name: "index_users_on_sysadmin"
   end
 
 end

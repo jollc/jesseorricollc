@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-sm-8">
+    <h1>Alerts Admin (Home)</h1>
+    <h3>To add a new alert, click "New Alert" to the right.</h3>
+  </div>
+
+  <div class="col-sm-4 text-right">
+    <%= link_to "New Alert", new_alert_path, class: 'btn btn-bright btn-sm' %>
+  </div>
+</div>
+
+<ul class="list-group tips">
+  <li class="list-group-item active">Helpful Tips</li>
+  <li class="list-group-item">Only one alert can be active per website. If an alert has not expired before creating a new one, only the most recent alert will display.</li>
+  <li class="list-group-item">You must set both a start date and end date. The alert will no longer display starting on the end date.</li>
+  <li class="list-group-item">Expired alerts will not show up on the website and may be deleted.</li>
+</ul>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Ministry</th>
+      <th>Content</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Notes</th>
+      <th class="text-center">Active?</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @alerts.each do |alert| %>
+      <tr>
+        <td> tbd </td>
+        <td><%= alert.content %></td>
+        <td><%= l alert.start_date, format: :basic_date %></td>
+        <td><%= l alert.end_date, format: :basic_date %></td>
+        <td><%= alert.notes %></td>
+        <td class="text-center just-icon">
+          <% if alert.start_date <= Date.today && alert.end_date > Date.today %>
+            <i class="mdi mdi-check-circle text-success"></i>
+          <% else %>
+            <i class="mdi mdi-close-circle text-danger"></i>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to "Edit", edit_alert_url(alert), class: 'btn btn-success btn-sm' %>
+          <%= link_to "Delete", alert, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

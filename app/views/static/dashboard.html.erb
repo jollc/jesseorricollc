@@ -1,0 +1,10 @@
+<h1>Admin Dashboard</h1>
+<p>This is the home page of your admin controls. Use the navigation to the left to make any changes. Find your account information below. If you need to make any changes, please hit the Edit Account Info button.</p>
+
+<ul class="list-group">
+  <li class="list-group-item active">Account Information</li>
+  <li class="list-group-item"><strong>Name:</strong> <%= current_user.name %></li>
+  <li class="list-group-item"><strong>Email:</strong> <%= current_user.email %></li>
+  <li class="list-group-item"><strong>Password:</strong> <em>hidden</em></li>
+  <li class="list-group-item"><%= link_to "Edit Account Info", edit_user_path(current_user), class: 'btn btn-bright btn-sweep' %></li>
+</ul>

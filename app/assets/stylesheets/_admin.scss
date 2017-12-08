@@ -1,0 +1,217 @@
+// ---------------- ADMIN ----------------
+.admin {
+  background-color: #f8f8f8;
+  font-size: 14px;
+
+  header {
+    background-color: $cool-primary;
+    color: white;
+    height: 64px;
+    padding: 16px 32px;
+
+    img {
+      width: 24px;
+      height: 24px;
+      margin-top: 3px;
+    }
+
+    a {
+      color: white;
+      display: inline-block;
+    }
+
+    .btn { margin: 0; }
+  }
+
+  ////////////////////////////////////// Left Navigation Bar
+  .admin-list {
+    list-style-type: none;
+    -webkit-padding-start: 0;
+
+    li a {
+      background-color: white;
+      text-align: left;
+      margin-bottom: 10px;
+      padding: 16px;
+      display: block;
+
+      i {
+        @include simpleTransition;
+        font-size: 18px;
+        line-height: 12px;
+        margin-left: 0;
+        margin-right: 12px;
+      }
+
+      &:hover {
+        background-color: $light;
+        i {
+          margin-right: 20px;
+          left: 0;
+        }
+      }
+    }
+
+    li.active a {
+      border-color: $cool-secondary;
+      background-color: $cool-secondary;
+      color: white;
+
+      &:hover { background-color: $cool-secondary; }
+    }
+  }
+
+  ////////////////////////////////////// Main Content Area
+  main {
+    padding: 32px;
+
+    h1, h2, h3 { margin-top: 0; }
+    h3 { font-size: 16px; }
+    p { margin-bottom: 16px; }
+    .btn-spaced .btn { margin-left: 16px; }
+    .text-right .btn.btn-bright.btn-sm { margin-bottom: 4px; }
+
+    // List Group Tips
+    .list-group.tips {
+      font-size: 12px;
+      margin: 24px 0;
+
+      .list-group-item {
+        padding: 8px;
+        &.active { text-transform: uppercase; }
+      }
+    }
+
+    // Well
+    .well {
+      border: 1px solid $cool-secondary;
+      background-color: $light;
+      padding: 32px;
+    }
+
+    // Tables
+    table {
+      background-color: white;
+
+      thead th {
+        font-weight: 300;
+        text-transform: uppercase;
+      }
+
+      td { vertical-align: middle; }
+      .btn { margin-right: 8px; }
+
+      ul {
+        list-style-type: none;
+        -webkit-padding-start: 0;
+        margin-bottom: 0;
+
+        li {
+          font-size: 11px;
+        }
+      }
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+      background-color: transparentize($cool-primary, 0.9);
+    }
+
+    // Forms
+    .form-group {
+      margin-bottom: 32px;
+    }
+
+    input.form-control,
+    select.form-control,
+    textarea.form-control,
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"],
+    select,
+    textarea {
+      border-radius: 0;
+      border: 1px solid $cool-secondary;
+      background-color: white;
+      line-height: 26px;
+      width: 100%;
+      height: auto;
+      padding: 8px 16px;
+
+      &:focus {
+        border: 1px solid $cool-bright;
+        outline: $cool-bright auto 3px;
+      }
+
+      &:disabled {
+        border: 1px solid silver;
+        background-color: #e6e6e6;
+        color: silver;
+        cursor: not-allowed;
+      }
+    }
+
+    select { height: 44px !important; }
+    select[multiple], select[size] { height: auto !important; }
+
+    input[type="submit"] {
+      font-weight: 400;
+      margin-left: 16px;
+    }
+
+    hr {
+      border-top: 1px solid #e3e3e3;
+      margin: 32px -32px;
+    }
+
+    // Table cells with just icons
+    .just-icon {
+      text-align: center;
+
+      i { font-size: 24px; }
+    }
+  }
+
+  // Pagination
+  .pagination {
+    margin: 10px;
+
+    span {
+      border-radius: 5px;
+      border: 1px solid silver;
+      display: inline-block;
+    }
+
+    span.current { padding: 0 10px; }
+
+    a {
+      color: #0099CC !important; //info color
+      padding: 0 10px;
+      display: inline-block;
+    }
+  }
+
+  // Alerts / Flashes / Errors
+  .alert {
+    border: 1px solid #0099CC;
+    border-left: 16px solid #0099CC;
+    background-color: white;
+    margin: 0 0 32px 0;
+    padding: 16px;
+  }
+
+  #error_explanation {
+    h2 {
+      margin-bottom: 0;
+      &::after { display: none; }
+    }
+
+    ul {
+      background-color: purple;
+      color: white;
+      margin-bottom: 30px;
+      padding: 10px;
+    }
+  }
+}

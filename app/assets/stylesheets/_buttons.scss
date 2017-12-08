@@ -1,0 +1,84 @@
+// ---------------- BUTTONS ----------------
+.btn {
+  @include simpleTransition;
+  border-radius: 0;
+  border: 2px solid transparent;
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 16px 32px;
+  cursor: pointer;
+
+  i {
+    @include simpleTransition;
+    font-size: 14px;
+    vertical-align: bottom;
+    margin-left: 10px;
+    position: relative;
+    left: 0;
+  }
+
+  &:hover i { left: 8px; }
+}
+
+.btn-default {
+  border: 2px solid $dark-90;
+  color: $dark-90;
+  &:hover {
+    border: 2px solid darken($cool-bright, 10%);
+    background-color: $cool-bright;
+    color: white;
+  }
+}
+
+// Different default button hover in admin
+.admin .btn-default:hover {
+  border: 2px solid $dark-90;
+  color: $dark-90;
+  background-color: darken(white, 10%);
+}
+
+.btn-white {
+  border: 2px solid white;
+  color: white;
+}
+
+.btn-bright {
+  background-color: $cool-bright;
+  border-color: $cool-bright;
+  color: white;
+  &:hover {
+    background-color: darken($cool-bright, 10%);
+    color: white;
+  }
+}
+
+.btn-accent {
+  background-color: $cool-accent;
+  border-color: $cool-accent;
+  color: white;
+  &:hover {
+    background-color: darken($cool-accent, 10%);
+    color: white;
+  }
+}
+
+.btn-block {
+  font-size: 20px;
+  margin-top: 0 !important;
+  padding: 22px 0;
+
+  a {
+    color: white;
+    font-weight: 200;
+    display: block;
+  }
+}
+
+.btn-sm {
+  font-size: 11px;
+  line-height: 11px;
+  padding: 8px 16px;
+}

@@ -1,0 +1,4 @@
+<h1><%= @page.example_h1 %></h1>
+<%= raw @page.example_content %>
+
+<%= image_tag (@page.example_image.thumb('400x').encode('jpg', '-quality 82').url) unless @page.example_image.blank? %>

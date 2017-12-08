@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-sm-8">
+    <h1>Subdomains Admin (Home)</h1>
+    <h3>To add a new subdomain, click "New Subdomain" to the right.</h3>
+  </div>
+
+  <div class="col-sm-4 text-right">
+    <% if current_user.admin? || current_user.sysadmin? %>
+      <%= link_to "New Subdomain", new_subdomain_path, class: 'btn btn-bright btn-sm' %>
+    <% end %>
+  </div>
+</div>
+
+<ul class="list-group tips">
+  <li class="list-group-item active">Helpful Tips</li>
+  <li class="list-group-item">Subdomains should not be edited unless by a top System Admin. Changing anything here without knowledge could break the website.</li>
+</ul>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Default Layout</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @subdomains.each do |subdomain| %>
+      <tr>
+        <td><%= subdomain.name %></td>
+        <td><%= subdomain.default_layout %></td>
+        <td><%= link_to "Edit", edit_subdomain_path(subdomain), class: 'btn btn-success btn-sm' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

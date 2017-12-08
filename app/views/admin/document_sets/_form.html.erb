@@ -1,0 +1,66 @@
+<%= form_for @document_set do |f| %>
+
+  <% unless f.object.errors.blank? %>
+    <div class="alert">
+      <h2>Error:</h2>
+      <%= f.object.errors.full_messages %>
+    </div>
+  <% end %>
+
+  <% if current_user.sysadmin? %>
+    <div class="well">
+      <h2>Sysadmin Only</h2>
+      <div class="form-group">
+        <%= f.label :slug %>
+        <%= f.text_field :slug %>
+        <p class="help-block">For referencing from code, e.g. "/sports/permission"</p>
+      </div>
+      <div class="form-group">
+        <div class="checkbox">
+          <label>
+            <%= f.check_box :required %>
+            Required
+          </label>
+        </div>
+        <p class="help-block">This will block users from deleting this document_set. Only sysadmins can see this field. Helpful when referencing the slug from code.</p>
+      </div>
+    </div>
+    <br /><br />
+  <% end %>
+
+  <div class="well">
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+      <p class="help-block">A name, informational only.</p>
+    </div>
+    <div class="form-group">
+      <%= f.label :description %>
+      <%= f.text_area :description, class: 'form-control' %>
+      <p class="help-block">A short text description, informational only.</p>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :subdomain_ids, 'Subdomains' %>
+      <% if f.object.required? && !current_user.sysadmin? %>
+        <p class="form-control-static"><%= f.object.subdomains.join(', ') %></p>
+      <% else %>
+        <%= f.select :subdomain_ids,
+          Simplec::Subdomain.order(name: :asc).collect{|s| [s.name, s.id]},
+          {include_blank: true},
+          multiple: true,
+          class: 'form-control'
+        %>
+        <p class="help-block">At least one subdomain is required.</p>
+      <% end %>
+    </div>
+
+    <hr />
+
+    <div class="text-right">
+      <%= link_to "Back", document_sets_url, class: 'btn btn-default' %>
+      <%= f.submit class: 'btn btn-bright' %>
+    </div>
+  </div>
+
+<% end %>

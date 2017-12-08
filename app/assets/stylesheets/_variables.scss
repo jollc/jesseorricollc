@@ -1,0 +1,23 @@
+// ---------------- VARIABLES ----------------
+// CP Gray
+$dark: #2d2f35;
+$dark-90: transparentize($dark, 0.10);
+$dark-75: transparentize($dark, 0.25);
+$dark-45: transparentize($dark, 0.55);
+$light: #f6f6f6;
+
+// CP Cool
+$cool-primary: #3a4b6d;
+$cool-primary-75: transparentize($cool-primary, 0.25);
+$cool-secondary: #634e83;
+$cool-secondary-75: transparentize($cool-secondary, 0.25);
+$cool-accent: #1baa8a;
+$cool-bright: #d54e73;
+
+// CP Warm
+$warm-primary: #d54e73;
+$warm-secondary: #f8785f;
+
+// Bootstrap Overrides
+// $brand-primary: $cool-primary;
+// $brand-secondary: $cool-secondary;

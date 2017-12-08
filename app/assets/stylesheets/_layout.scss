@@ -1,0 +1,41 @@
+// ---------------- LAYOUT ----------------
+// Some basic styles are included, feel free to change or remove anything here.
+html {
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: #47484c;
+}
+
+//////////////////////////////////// Header and Slider
+// Global Nav
+nav {
+  ul {
+    list-style-type: none;
+    margin: 0;
+    -webkit-padding-start: 0;
+
+    li {
+      display: inline-block;
+    }
+  }
+}
+
+// Container
+.container-fluid {
+  max-width: 1248px;
+}
+
+header {
+  background-color: silver;
+  .container-fluid { padding: 12px 32px; }
+  nav {
+    text-align: right;
+    li { margin-left: 24px; }
+  }
+}
+
+main .container-fluid {
+  padding: 96px 32px;
+}

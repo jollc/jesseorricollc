@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= render partial: 'shared/head' %>
+  </head>
+
+  <body>
+    <header>
+      <div class="container-fluid">
+        <nav>
+          <ul>
+            <li><%= link_to "Home", root_url %></li>
+            <li><%= link_to "Link One", root_url %></li>
+            <li><%= link_to "Link Two", root_url %></li>
+            <li><%= link_to "Link Three", root_url %></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="container-fluid">
+        <%= yield %>
+      </div>
+    </main>
+
+  </body>
+</html>

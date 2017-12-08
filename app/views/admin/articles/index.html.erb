@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-sm-8">
+    <h1>Articles Admin (Home)</h1>
+    <h3>To add a new article, click "New Article" to the right.</h3>
+  </div>
+
+  <div class="col-sm-4 text-right">
+    <%= link_to "New Article", new_article_path, class: 'btn btn-bright btn-sm' %>
+  </div>
+</div>
+
+<ul class="list-group tips">
+  <li class="list-group-item active">Helpful Tips</li>
+  <li class="list-group-item">TIP</li>
+</ul>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Ministry</th>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Content</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @articles.each do |article| %>
+      <tr>
+        <td> tbd </td>
+        <td><%= article.title %></td>
+        <td><%= article.author %></td>
+        <td><%= truncate(article.content, length: 50) %></td>
+        <td>
+          <%= link_to "Edit", edit_article_url(article), class: 'btn btn-success btn-sm' %>
+          <%= link_to "Delete", article, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

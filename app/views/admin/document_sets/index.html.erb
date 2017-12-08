@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-sm-8">
+    <h1>Document Sets Admin (Home)</h1>
+    <h3>To add a new document set, click "New Document Set" to the right.</h3>
+  </div>
+
+  <div class="col-sm-4 text-right">
+    <%= link_to "New Document Set", new_document_set_path, class: 'btn btn-bright btn-sm' %>
+    <%= link_to "View Documents", documents_path, class: 'btn btn-default btn-sm' %>
+  </div>
+</div>
+
+<ul class="list-group tips">
+  <li class="list-group-item active">Helpful Tips</li>
+  <li class="list-group-item">You may choose either a Document Set OR a subdomain when uploading documents. Do not choose both.</li>
+  <li class="list-group-item">Document Sets allow you to group certain documents together.</li>
+  <li class="list-group-item">If you are updating an existing document, click edit and replace the file within. <strong>Do not</strong> create a new document as this could change the path and break any links.</li>
+  <li class="list-group-item">If a document does not have a delete button available, it is marked required and can only be deleted by a System Admin.</li>
+</ul>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Slug</th>
+      <th>Subdomains</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <td colspan="7"><%= paginate @document_sets %></td>
+    </tr>
+  </tfoot>
+  <tbody>
+    <% @document_sets.each do |document_set| %>
+      <tr>
+        <td><%= document_set.name %></td>
+        <td><%= document_set.slug %></td>
+        <td><%= document_set.subdomains.pluck(:name).join(', ') %></td>
+        <td><%= document_set.description.to_s.truncate(32) %></td>
+        <td>
+          <%= link_to "Edit", edit_document_set_path(document_set), class: 'btn btn-success btn-sm' %>
+          <% unless document_set.required? %>
+            <%= link_to "Delete", document_set, method: :delete, data: { confirm: 'Are you sure? This cannot be undone!' }, :class => 'btn btn-danger btn-sm' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

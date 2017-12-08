@@ -1,0 +1,85 @@
+// ---------------- HELPERS ----------------
+// Positioning
+.margin-0 { margin: 0 !important; }
+.margin-bottom-0 { margin-bottom: 0 !important; }
+.margin-bottom-32 { margin-bottom: 32px !important; }
+.padding-bottom-0 { padding-bottom: 0 !important; }
+
+.hr-standard { margin: 64px 0; }
+
+// Hide text editor popups for now
+.note-link-popover { display: none; }
+
+// Backgrounds and Text Colors
+.bg-white { background-color: white; }
+.text-white { color: white; }
+
+$colors-list: (
+  'cool-primary': $cool-primary,
+  'cool-secondary': $cool-secondary,
+  'cool-bright': $cool-bright,
+  'cool-accent': $cool-accent,
+  'warm-primary': $warm-primary,
+  'warm-secondary': $warm-secondary,
+  'dark': $dark,
+  'dark-90': $dark-90,
+  'dark-75': $dark-75,
+  'dark-45': $dark-45,
+  'light': $light
+);
+
+@each $color, $color-name in $colors-list {
+  // Backgrounds
+  .bg-#{$color} {
+    background-color: $color-name !important;
+    color: white;
+  }
+
+  // Text
+  .text-#{$color} { color: $color-name; }
+}
+
+.bg-light { color: $dark !important; }
+
+// Image Fill Box
+.image-fill {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+// Top button
+.to-top {
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  background-color: $cool-secondary;
+  font-size: 10px;
+  line-height: 14px;
+  color: white;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 5px 10px 10px 12px;
+  box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  right: 0;
+  bottom: 100px;
+  z-index: 100;
+  display: none;
+
+  i {
+    font-size: 20px;
+    display: block;
+  }
+
+  &:hover {
+    background-color: darken($cool-secondary, 10%);
+    text-decoration: none;
+  }
+}
+
+// List Group Overrides
+.list-group-item.active {
+  background-color: $cool-accent;
+  border-color: $cool-accent;
+}

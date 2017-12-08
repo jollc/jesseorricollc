@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-sm-8">
+    <h1>Web Pages Admin (Edit)</h1>
+  </div>
+
+  <div class="col-sm-4 btn-spaced">
+    <%= link_to "View Page", simplec_url_for(@page), class: 'btn btn-bright btn-sm float-right', target: :_blank %>
+    <%= link_to "Back", admin_pages_url, class: 'btn btn-default btn-sm float-right' %>
+  </div>
+</div>
+
+<%= render "form" %>

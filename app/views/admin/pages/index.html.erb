@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="col-sm-6">
+    <h1>Web Pages Admin (Home)</h1>
+    <h3>To add a new page, click one of the buttons to the right.</h3>
+  </div>
+
+  <div class="col-sm-6 text-right">
+    <% if current_user.admin? || current_user.sysadmin? %>
+      <% Page.subclasses.each do |cls| %>
+        <%= link_to "New #{cls.name.sub('Page::', '')} Page", new_admin_page_path(type: cls.name), class: 'btn btn-bright btn-sm' %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<ul class="list-group tips">
+  <li class="list-group-item active">Helpful Tips</li>
+  <li class="list-group-item"><strong>Home Page:</strong> Used for the main index page of each site.</li>
+  <li class="list-group-item"><strong>People Page:</strong> Used for pages that display staff members from the database.</li>
+  <li class="list-group-item"><strong>Tabs Page:</strong> Used for pages with tabbed content.</li>
+</ul>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Subdomain</th>
+      <th>URL</th>
+      <th>Title</th>
+      <th>Details</th>
+      <th>Subpages</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <td colspan="6"><%= paginate @pages %></td>
+    </tr>
+  </tfoot>
+  <tbody>
+    <% @pages.each do |page| %>
+      <tr>
+        <td><%= page.subdomain.try(:name) %></td>
+        <td><%= link_to page.path, simplec_url_for(page), target: :_blank %></td>
+        <td><%= page.title %></td>
+        <td>
+          <ul>
+            <li><strong>Type:</strong> <%= page.type.demodulize %></li>
+            <% unless page.layout.blank? %>
+              <li><strong>Layout:</strong> <%= page.layout %></li>
+            <% end %>
+            <li>
+              <strong>Parent:</strong>
+              <% if page.parent_id && page.parent.nil? %>
+                <span class="label label-warning" title="The next save, will clear this message.">Deleted</span>
+              <% else %>
+                <%= page.parent.try(:path) %>
+              <% end %>
+            </li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <% page.children.order(path: :asc).each do |sub| %>
+              <li><%= link_to sub.path, edit_admin_page_path(sub) %></li>
+            <% end %>
+          </ul>
+        </td>
+        <td>
+          <%= link_to "View", simplec_url_for(page), class: 'btn btn-default btn-sm', target: :_blank %>
+          <%= link_to "Edit", edit_admin_page_path(page), class: 'btn btn-success btn-sm' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,80 @@
+<div class="row">
+  <div class="col-sm-8">
+    <h1>Users Admin (Edit)</h1>
+  </div>
+
+  <div class="col-sm-4 btn-spaced">
+    <%= link_to "Back", users_url, class: 'btn btn-default btn-sm float-right' %>
+  </div>
+</div>
+
+<% if current_user.id == @user.id || current_user.sysadmin? || current_user.admin? %>
+  <%= form_for @user do |f| %>
+    <% unless f.object.errors.blank? %>
+      <div class="alert">
+        <h2>Error:</h2>
+        <%= f.object.errors.full_messages %>
+      </div>
+    <% end %>
+
+    <div class="well">
+      <h2>User Information</h2>
+
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+        <p class="help-block">For display purposes only.</p>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email %>
+        <p class="help-block">Email address is used to log into the application.</p>
+      </div>
+
+      <% if current_user.id == @user.id || current_user.sysadmin? %>
+        <div class="form-group">
+          <%= f.label :password %>
+          <%= f.password_field :password %>
+          <p class="help-block">Only enter a password if you are changing your current password.</p>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation %>
+        </div>
+      <% else %>
+        <em>You may only change the password if you are the user you are editing unless you are a System Admin.</em>
+        <br /><br />
+      <% end %>
+
+      <% if current_user.sysadmin? %>
+        <hr />
+
+        <h2>User Permissions</h2>
+
+        <div class="form-group">
+          <%= f.label :admin %>
+          <%= f.check_box :admin %>
+          <p class="help-block">Ability to: create new pages, edit all pages, add admins, add user permissions.</p>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :sysadmin %>
+          <%= f.check_box :sysadmin %>
+          <p class="help-block">Ability to: all admin permissions, create admins and sysadmins.</p>
+        </div>
+      <% end %>
+
+      <hr />
+
+      <div class="text-right">
+        <%= link_to "Back", users_url, class: 'btn btn-default' %>
+        <%= f.submit class: 'btn btn-bright' %>
+      </div>
+    </div>
+
+  <% end %>
+<% else %>
+  <em>You do not have permission to view or edit this information. Please return to your Dashboard or contact an admin with any questions.</em>
+<% end %>

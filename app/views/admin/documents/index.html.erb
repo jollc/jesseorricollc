@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-sm-8">
+    <h1>Documents Admin (Home)</h1>
+    <h3>To add a new document, click "New Document" to the right.</h3>
+  </div>
+
+  <div class="col-sm-4 text-right">
+    <%= link_to "New Document", new_document_path, class: 'btn btn-bright btn-sm' %>
+    <%= link_to "View Document Sets", document_sets_path, class: 'btn btn-default btn-sm' %>
+  </div>
+</div>
+
+<ul class="list-group tips">
+  <li class="list-group-item active">Helpful Tips</li>
+  <li class="list-group-item">You may choose either a Document Set OR a subdomain when uploading documents. Do not choose both.</li>
+  <li class="list-group-item">Document Sets allow you to group certain documents together.</li>
+  <li class="list-group-item">If you are updating an existing document, click edit and replace the file within. <strong>Do not</strong> create a new document as this could change the path and break any links.</li>
+  <li class="list-group-item">If a document does not have a delete button available, it is marked required and can only be deleted by a System Admin.</li>
+</ul>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Set</th>
+      <th>Subdomains</th>
+      <th>Description</th>
+      <th>Slug</th>
+      <th class="text-center">Doc?</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <td colspan="7"><%= paginate @documents %></td>
+    </tr>
+  </tfoot>
+  <tbody>
+    <% @documents.each do |document| %>
+      <tr>
+        <td><%= document.name %></td>
+        <% if document.document_set %>
+          <td><%= link_to document.document_set.name, edit_document_set_path(document.document_set) %></td>
+          <td><%= document.document_set.subdomains.pluck(:name).join(', ') %></td>
+        <% else %>
+          <td><em>Not in a set.</em></td>
+          <td><%= document.subdomains.pluck(:name).join(', ') %></td>
+        <% end %>
+        <td><%= document.description.to_s.truncate(32) %></td>
+        <td><%= document.slug %></td>
+        <td class="just-icon">
+          <% if document.file %>
+            <i class="mdi mdi-check-circle text-success"></i>
+          <% else %>
+            <i class="mdi mdi-close-circle text-danger"></i>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to "Edit", edit_document_path(document), class: 'btn btn-success btn-sm' %>
+          <% unless document.required? %>
+            <%= link_to "Delete", document, method: :delete, data: { confirm: 'Are you sure? This cannot be undone!' }, :class => 'btn btn-danger btn-sm' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

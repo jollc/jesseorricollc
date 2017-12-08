@@ -1,0 +1,65 @@
+<%= form_for (@alert) do |f| %>
+
+  <% f.object = @alert %>
+  <% unless f.object.errors.blank? %>
+    <div class="alert">
+      <h2>Error:</h2>
+      <%= f.object.errors.full_messages %>
+    </div>
+  <% end %>
+
+  <div class="well">
+    <!-- <div class="form-group">
+      <#%= f.label :subdomain_id, 'Subdomain', class: 'control-label' %>
+      <#%= f.select :subdomain_id,
+        Simplec::Subdomain.order(name: :asc).map{|s| [s.name, s.id]},
+        {include_blank: true},
+        class: 'form-control'
+      %>
+      <p class="help-block">Please select the subdomain where the alert will appear.</p>
+    </div> -->
+
+    <div class="form-group">
+      <%= f.label :content, 'Alert Content' %>
+      <%= f.text_field :content %>
+      <p class="help-block">The content of the alert that appears at the top of the site.</p>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <%= f.label :start_date %>
+          <%= f.date_field :start_date %>
+          <p class="help-block">The date the alert should start.</p>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <%= f.label :end_date %>
+          <%= f.date_field :end_date %>
+          <p class="help-block">The date the alert should expire. MUST be set at least one day AFTER start date or alert will not display.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :link %>
+      <%= f.text_field :link %>
+      <p class="help-block">Should begin with http:// - Not required. If a link is entered here, it will show as a button at the end of the alert content.</p>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :notes %>
+      <%= f.text_area :notes %>
+      <p class="help-block">Informational only, this shows only in the admin area for reference.</p>
+    </div>
+
+    <hr />
+
+    <div class="text-right">
+      <%= link_to "Back", alerts_url, class: 'btn btn-default' %>
+      <%= f.submit class: 'btn btn-bright' %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,19 @@
+// ---------------- NAVIGATION ----------------
+// Global Nav
+nav {
+  ul {
+    list-style-type: none;
+    margin: 0;
+    -webkit-padding-start: 0;
+
+    li {
+      display: inline-block;
+      margin-left: 24px;
+
+      a {
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+    }
+  }
+}

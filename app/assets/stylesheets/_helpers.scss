@@ -83,3 +83,10 @@ $colors-list: (
   background-color: $cool-accent;
   border-color: $cool-accent;
 }
+
+// Well
+.well {
+  border: 1px solid $cool-secondary;
+  background-color: $light;
+  padding: 32px;
+}

@@ -9,9 +9,9 @@ class ApplicationController < ActionController::Base
   #   http_basic_authenticate_with name: "patrick", password: "henry"
   # end
 
-  # before_action :authenticate_user!
-  # before_action :require_admin!
-  # before_action :require_sysadmin!
+  before_action :authenticate_user!
+  before_action :require_admin!
+  before_action :require_sysadmin!
 
   rescue_from User::Unauthenticated,
     with: :unauthenticated!
